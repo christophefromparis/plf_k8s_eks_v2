@@ -1,0 +1,22 @@
+options:
+  max-time: 30
+
+image: christophefromparis/pipelines:1.5.0
+
+pipelines:
+  default:
+    - step:
+        name: Infrastructure
+        script:
+          - cd $BITBUCKET_CLONE_DIR/infra
+          - terraform init -backend-config=backend.dev.tfvars
+          - terraform plan -out infra.plan
+          - terraform apply infra.plan
+          - pipe: atlassian/slack-notify:0.2.3
+            variables:
+              WEBHOOK_URL: 'https://hooks.slack.com/services/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'
+              MESSAGE: 'The EKS cluster is up!'
+    - step:
+        name: Softwares
+        script:
+          - aws eks update-kubeconfig --name PLATEFORME_CLOUD-ACADEMY_EKS_DEV --verbose --alias PLATEFORME_CLOUD-ACADEMY_EKS_DEV --kubeconfig $BITBUCKET_CLONE_DIR/kubeconfig

@@ -1,0 +1,5 @@
+    - userarn: ${cicd_user}
+      username: ContinuousIntegration
+      groups:
+      - system:masters
+
