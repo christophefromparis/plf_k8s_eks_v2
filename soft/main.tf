@@ -21,14 +21,6 @@ provider "helm" {
   version = "~> 0.9.0"
   tiller_image = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = "tiller"
-
-/*  kubernetes {
-    host     = "${data.terraform_remote_state.infra.k8s_endpoint}"
-
-    client_certificate     = "${base64decode(data.terraform_remote_state.infra.client_certificate)}"
-    client_key             = "${base64decode(data.terraform_remote_state.infra.client_key)}"
-    cluster_ca_certificate = "${base64decode(data.terraform_remote_state.infra.cluster_ca_certificate)}"
-  }*/
 }
 
 module "base" {
