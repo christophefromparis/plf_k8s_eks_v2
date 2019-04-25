@@ -22,22 +22,22 @@ provider "helm" {
   tiller_image = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = "tiller"
 
-  kubernetes {
+/*  kubernetes {
     host     = "${data.terraform_remote_state.infra.k8s_endpoint}"
 
     client_certificate     = "${base64decode(data.terraform_remote_state.infra.client_certificate)}"
     client_key             = "${base64decode(data.terraform_remote_state.infra.client_key)}"
     cluster_ca_certificate = "${base64decode(data.terraform_remote_state.infra.cluster_ca_certificate)}"
-  }
+  }*/
 }
 
 module "base" {
   source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_base_module.git"
 
-  gcp_credentials  = "${local.gcp_credentials}"
-  dns_provider     = "google"
-  gcp_project      = "${var.gcp_project}"
-  cluster_provider = "google"
+  #gcp_credentials  = "${local.gcp_credentials}"
+  dns_provider     = "aws"
+  #gcp_project      = "${var.gcp_project}"
+  cluster_provider = "aws"
   helm_version     = ["${var.helm_version}"]
   namespace_name   = ["${var.namespace_name}"]
 }
@@ -68,8 +68,7 @@ module "nodejs" {
   source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_nodejs_example_module.git"
 
   fqdn_suffix       = "${var.fqdn_suffix}"
-  gcp_project       = "${var.gcp_project}"
   target_ns         = ["${module.base.developement_ns}", "${module.base.staging_ns}", "${module.base.production_ns}"]
-  gcp_registry_host = "${var.gcp_registry_host}"
   developement_ns   = "${module.base.developement_ns}"
+  image             = "${var.aws_account}.dkr.ecr.eu-west-1.amazonaws.com/k8s-node-helloworld:development"
 }

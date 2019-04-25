@@ -1,15 +1,3 @@
-# -----------------------------
-# --- Google Cloud Platform ---
-# -----------------------------
-variable "gcp_project" {
-  description = "The GCP project name"
-  default = "fr-ist-isteau-monica-demo"
-}
-variable "gcp_registry_host" {
-  description = "The GCP registry host"
-  default     = "eu.gcr.io"
-}
-
 # --------------------------------
 # ---- The Kubernetes cluster ----
 # --------------------------------
@@ -61,5 +49,12 @@ variable "keycloak_password" {
 }
 variable "fqdn_suffix" {
   description = "The FQDN suffix"
-  default     = "yelty-test.fr"
+  default     = "k.infra.istefr.fr"
+}
+# --------------------------------
+# ------------- AWS --------------
+# --------------------------------
+variable "aws_account" {
+  description = "The AWS Veolia account"
+  default     = "665901990640"
 }
