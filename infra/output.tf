@@ -7,7 +7,7 @@ output "fqdn_suffix" {
 output "k8s_endpoint" {
   value = "${aws_eks_cluster.eks.endpoint}"
 }
-output "eks-node-arn" {
+output "eks_node_arn" {
   value = "${aws_iam_role.eks-node.arn}"
 }
 output "creator_label" {

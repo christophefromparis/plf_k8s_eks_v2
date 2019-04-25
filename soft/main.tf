@@ -34,12 +34,11 @@ provider "helm" {
 module "base" {
   source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_base_module.git"
 
-  #gcp_credentials  = "${local.gcp_credentials}"
   dns_provider     = "aws"
-  #gcp_project      = "${var.gcp_project}"
   cluster_provider = "aws"
   helm_version     = ["${var.helm_version}"]
   namespace_name   = ["${var.namespace_name}"]
+  eks_node_arn     = "${data.terraform_remote_state.infra.eks_node_arn}"
 }
 
 module "monitoring" {
