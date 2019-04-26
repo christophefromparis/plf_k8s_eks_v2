@@ -22,6 +22,10 @@ provider "helm" {
   tiller_image    = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = "tiller"
   install_tiller  = false
+  namespace       = "kube-system"
+  kubernetes {
+    host = "${data.terraform_remote_state.infra.k8s_endpoint}"
+  }
 }
 
 module "base" {
