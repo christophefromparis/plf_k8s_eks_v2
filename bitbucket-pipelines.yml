@@ -22,6 +22,7 @@ pipelines:
           - aws eks update-kubeconfig --name PLATEFORME_CLOUD-ACADEMY_EKS_DEV --verbose --alias PLATEFORME_CLOUD-ACADEMY_EKS_DEV
           - cd $BITBUCKET_CLONE_DIR/soft
           - terraform init -backend-config=backend.dev.tfvars
+          - terraform refresh
           - terraform plan -out soft.plan
           - terraform apply soft.plan
           - rm soft.plan
