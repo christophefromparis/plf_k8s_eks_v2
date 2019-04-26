@@ -19,8 +19,9 @@ provider "kubernetes" {
 
 provider "helm" {
   version = "~> 0.9.0"
-  tiller_image = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
+  tiller_image    = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = "tiller"
+  install_tiller  = false
 }
 
 module "base" {
@@ -31,8 +32,10 @@ module "base" {
   helm_version     = ["${var.helm_version}"]
   namespace_name   = ["${var.namespace_name}"]
   eks_node_arn     = "${data.terraform_remote_state.infra.eks_node_arn}"
+  tiller_is_ready  = "${kubernetes_deployment.tiller.metadata.0.name}"
 }
 
+/*
 module "monitoring" {
   source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_monitoring_module.git"
 
@@ -62,4 +65,4 @@ module "nodejs" {
   target_ns         = ["${module.base.developement_ns}", "${module.base.staging_ns}", "${module.base.production_ns}"]
   developement_ns   = "${module.base.developement_ns}"
   image             = "${var.aws_account}.dkr.ecr.eu-west-1.amazonaws.com/k8s-node-helloworld:development"
-}
+}*/
