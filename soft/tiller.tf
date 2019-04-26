@@ -116,7 +116,7 @@ resource "kubernetes_deployment" "tiller" {
             name = "TILLER_HISTORY_MAX"
             value = 0
           }
-          image = "image: gcr.io/kubernetes-helm/tiller:v2.13.1"
+          image = "gcr.io/kubernetes-helm/tiller:v2.13.1"
           image_pull_policy = "IfNotPresent"
           liveness_probe {
             failure_threshold = 3
