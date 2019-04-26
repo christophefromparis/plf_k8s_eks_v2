@@ -123,7 +123,7 @@ resource "kubernetes_deployment" "tiller" {
             http_get {
               path = "liveness"
               port = "44135"
-              scheme = "http"
+              scheme = "HTTP"
             }
             initial_delay_seconds = 1
             period_seconds = 10
@@ -145,7 +145,7 @@ resource "kubernetes_deployment" "tiller" {
             http_get {
               path = "readiness"
               port = "44135"
-              scheme = "http"
+              scheme = "HTTP"
             }
             initial_delay_seconds = 1
             period_seconds = 10
