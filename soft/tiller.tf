@@ -98,13 +98,14 @@ resource "kubernetes_deployment" "tiller" {
       }
     }
     "template" {
-      labels {
-        app  = "helm"
-        name = "tiller"
+      "metadata" {
+        labels {
+          app  = "helm"
+          name = "tiller"
+        }
       }
-      "metadata" {}
       "spec" {
-        automountServiceAccountToken = true
+        //automountServiceAccountToken = true
         container {
           name = "tiller"
           env {
@@ -153,7 +154,7 @@ resource "kubernetes_deployment" "tiller" {
           }
         }
         service_account_name = "tiller"
-        service_account = "tiller"
+        //service_account = "tiller"
       }
     }
   }
