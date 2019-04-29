@@ -21,7 +21,7 @@ provider "helm" {
   version = "~> 0.9.0"
   tiller_image    = "gcr.io/kubernetes-helm/tiller:${var.tiller_version}"
   service_account = "tiller"
-  install_tiller  = false
+  install_tiller  = true
   namespace       = "kube-system"
   kubernetes {
     host = "${data.terraform_remote_state.infra.k8s_endpoint}"
@@ -36,7 +36,7 @@ module "base" {
   helm_version     = ["${var.helm_version}"]
   namespace_name   = ["${var.namespace_name}"]
   eks_node_arn     = "${data.terraform_remote_state.infra.eks_node_arn}"
-  tiller_is_ready  = "${kubernetes_deployment.tiller.metadata.0.name}"
+  tiller_is_ready  = "unused"
 }
 
 /*
