@@ -38,7 +38,6 @@ module "base" {
   eks_node_arn     = "${data.terraform_remote_state.infra.eks_node_arn}"
 }
 
-/*
 module "monitoring" {
   source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_monitoring_module.git"
 
@@ -68,4 +67,4 @@ module "nodejs" {
   target_ns         = ["${module.base.developement_ns}", "${module.base.staging_ns}", "${module.base.production_ns}"]
   developement_ns   = "${module.base.developement_ns}"
   image             = "${var.aws_account}.dkr.ecr.eu-west-1.amazonaws.com/k8s-node-helloworld:development"
-}*/
+}
