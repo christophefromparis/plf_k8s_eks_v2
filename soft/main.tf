@@ -36,7 +36,6 @@ module "base" {
   helm_version     = ["${var.helm_version}"]
   namespace_name   = ["${var.namespace_name}"]
   eks_node_arn     = "${data.terraform_remote_state.infra.eks_node_arn}"
-  tiller_is_ready  = "unused"
 }
 
 /*
