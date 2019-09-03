@@ -7,7 +7,7 @@ data "terraform_remote_state" "infra" {
   backend = "s3"
   config {
     region  = "eu-west-1"
-    bucket  = "veolia-vwis-infra-irl-terraform"
+    bucket  = "yelty-vwis-infra-irl-terraform"
     key     = "dev.k8s.infra.tfstate"
   }
 }
@@ -29,7 +29,7 @@ provider "helm" {
 }
 
 module "base" {
-  source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_base_module.git"
+  source = "git::https://github.com/christophefromparis/plf_k8s_base_module.git"
 
   dns_provider     = "aws"
   cluster_provider = "aws"
@@ -39,7 +39,7 @@ module "base" {
 }
 
 module "monitoring" {
-  source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_monitoring_module.git"
+  source = "git::https://github.com/christophefromparis/plf_k8s_monitoring_module.git"
 
   fqdn_suffix            = "${var.fqdn_suffix}"
   cluster_provider       = "aws"
@@ -51,7 +51,7 @@ module "monitoring" {
 }
 
 module "keycloak" {
-  source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_keycloak_module.git"
+  source = "git::https://github.com/christophefromparis/plf_k8s_keycloak_module.git"
 
   global_ns          = "${module.base.global_ns}"
   helm_version       = ["${var.helm_version}"]
@@ -61,7 +61,7 @@ module "keycloak" {
 }
 
 module "nodejs" {
-  source = "git::ssh://christophecosnefroyveolia@bitbucket.org/ist-efr/plf_k8s_nodejs_example_module.git"
+  source = "git::https://github.com/christophefromparis/plf_k8s_nodejs_example_module.git"
 
   fqdn_suffix       = "${var.fqdn_suffix}"
   target_ns         = ["${module.base.developement_ns}", "${module.base.staging_ns}", "${module.base.production_ns}"]

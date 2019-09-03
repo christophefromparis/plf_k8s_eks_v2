@@ -41,7 +41,7 @@ variable "helm_version" {
 }
 variable "keycloak_username" {
   description = "The administrator username"
-  default     = "veoliadevops"
+  default     = "yeltydevops"
 }
 variable "keycloak_password" {
   description = "The administrator password"
@@ -55,6 +55,6 @@ variable "fqdn_suffix" {
 # ------------- AWS --------------
 # --------------------------------
 variable "aws_account" {
-  description = "The AWS Veolia account"
-  default     = "665901990640"
+  description = "The AWS Yelty account"
+  default     = "xxxxxxxxxxxx"
 }
